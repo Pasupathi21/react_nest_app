@@ -27,19 +27,12 @@ import { ControllerWrapperService } from './utils/controller-wrapper/controller-
   controllers: [AppController],
   providers: [
     AppService,
-    // for global access 
-    RequestResponseService,
-    ControllerWrapperService,
-
     // global exception filters without creating any instance
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter
     }
   ],
-  exports: [
-    RequestResponseService,
-    ControllerWrapperService
-  ]
+  exports: []
 })
 export class AppModule {}

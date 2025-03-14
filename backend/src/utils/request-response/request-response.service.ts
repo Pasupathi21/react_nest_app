@@ -15,7 +15,7 @@ export class RequestResponseService {
      * @returns 
      * failed response
      */
-    success(@Res() response: Response, data: Data = {}, message: string = "success", statusCode: number = 200): Response {
+    public static success(@Res() response: Response, data: Data = {}, message: string = "success", statusCode: number = 200): Response {
         return response.status(statusCode).json({
             message: message,
             data,
@@ -33,11 +33,11 @@ export class RequestResponseService {
      * @returns 
      * failed response
      */
-    failed(@Res() response: Response, data: Data = null, message: string = "success", statusCode: number = 500): Response {
+    public static failed(@Res() response: Response, data: Data = null, message: string = "success", statusCode: number = 500): Response {
         return response.status(statusCode).json({
             message: message,
             data,
-            status: true,
+            status: false,
             statusCode
         })
     }
@@ -50,7 +50,7 @@ export class RequestResponseService {
      * @param statusCode 
      * @returns 
      */
-    send(@Res() response: Response, data: Data, message: string = "success", statusCode: number = 200, headers: Record<string, any> | null= null): Response {
+    static send(@Res() response: Response, data: Data, message: string = "success", statusCode: number = 200, headers: Record<string, any> | null= null): Response {
 
         if (headers && Object.keys(headers).length) Object.keys(headers).forEach((h:string) => response.setHeader(h, headers[h]))  
         return response.status(statusCode).send(data)

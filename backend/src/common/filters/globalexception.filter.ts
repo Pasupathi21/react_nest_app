@@ -6,7 +6,8 @@ import { Response } from 'express'
 export class GlobalExceptionFilter<T> implements ExceptionFilter {
   constructor(private readonly responseService: RequestResponseService) {}
   catch(exception: HttpException , host: ArgumentsHost) {
-    this.responseService.failed(
+    console.log("error >>>>", exception)
+    RequestResponseService.failed(
       host.switchToHttp().getResponse<Response>(),
       null,
       exception?.message,
