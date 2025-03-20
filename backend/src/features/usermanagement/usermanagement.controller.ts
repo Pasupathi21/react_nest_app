@@ -8,16 +8,16 @@ import { CreateUserDto, UpdateUserDto } from './dto/user.dto'
 export class UsermanagementController {
   constructor(
     private readonly cws :ControllerWrapperService,
-    private readonly userService: UsermanagementService
+    private readonly userService: UsermanagementService,
+   
   ) {}
 
   @Post('test')
   async testApi(@Res() res: Response, @Body() payload: any) { 
-    return this.cws.ControllerWrapper(this.userService.testApi, res, payload) }
+    return this.cws.ControllerWrapper(this.userService, this.userService.testApi, res, payload) }
   @Post('create')
   async create(@Res() res: Response, @Body() payload: CreateUserDto) { 
-    return await ControllerWrapper(this.userService.create, res, payload) 
-    // return await this.userService.create(payload)
+    return await this.cws.ControllerWrapper(this.userService, this.userService.create, res, payload) 
   }
 
   @Put('update')

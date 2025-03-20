@@ -7,26 +7,27 @@ import { PrismaService } from 'src/config/prisma/prisma.service';
 export class ControllerWrapperService {
     constructor(
         private readonly responseService: RequestResponseService,
-        private readonly DB: PrismaService
     ) {}
-    async ControllerWrapper (serviceCB: (...values: any[]) => Promise<any> | any, response: Response | any, ...rest: Record<string, any>[] | Record<string, any>[]) {
+    async ControllerWrapper (serviceInstance: Record<string, any> | null, serviceCB: (...values: any[]) => Promise<any> | any, response: Response | any, ...rest: Record<string, any>[] | Record<string, any>[]) {
         try{
-            const cbResponse = await serviceCB(...rest)
+            const bindServiceCb = serviceInstance ? serviceCB.bind(serviceInstance) : serviceCB
+            const cbResponse = await bindServiceCb(...rest)
             if (!cbResponse?.data) cbResponse.data = { ...cbResponse }
-
-            return RequestResponseService.success(response, cbResponse?.data, cbResponse?.message, cbResponse?.statusCode)
+            return this.responseService.success(response, cbResponse?.data, cbResponse?.message, cbResponse?.statusCode)
         }catch(error) {
+            console.log("error >>>>>", error)
             throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR)
         }
     }
 }
 
-export const ControllerWrapper = async (serviceCB: (...values: any[]) => Promise<any> | any, response: Response | any, ...rest: Record<string, any>[] | Record<string, any>[]) => {
+export const ControllerWrapper = async (serviceInstance: Record<string, any> | null, serviceCB: (...values: any[]) => Promise<any> | any, response: Response | any, ...rest: Record<string, any>[] | Record<string, any>[]) => {
     try{
-        const cbResponse = await serviceCB(...rest)
+        const bindServiceCb = serviceInstance ? serviceCB.bind(serviceInstance) : serviceCB
+        const cbResponse = await bindServiceCb(...rest)
         if (!cbResponse?.data) cbResponse.data = { ...cbResponse }
 
-        return RequestResponseService.success(response, cbResponse?.data, cbResponse?.message, cbResponse?.statusCode)
+        return new RequestResponseService().success(response, cbResponse?.data, cbResponse?.message, cbResponse?.statusCode)
     }catch(error) {
         throw new HttpException(error, HttpStatus.INTERNAL_SERVER_ERROR)
     }

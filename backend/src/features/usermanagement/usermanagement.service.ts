@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/config/prisma/prisma.service';
 import { CreateUserDto, UpdateUserDto } from './dto/user.dto'
+import { GeneralService } from 'src/utils/general/general.service';
 
 @Injectable()
 export class UsermanagementService {
-    constructor(private readonly DB: PrismaService){}
+    constructor(
+        private readonly DB: PrismaService,
+         private readonly generalService: GeneralService
+    ){}
 
     async testApi(payload: any) {
         try{
@@ -36,7 +40,7 @@ export class UsermanagementService {
             })
             return Promise.resolve({
                 data: userRes,
-                message: "success"
+                message: `success ${this.generalService.get_current_timestamp()}`
             })
         }catch(error){
             return Promise.reject(error)
