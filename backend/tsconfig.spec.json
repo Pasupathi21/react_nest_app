@@ -1,0 +1,14 @@
+// tsconfig.spec.json
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "outDir": "./dist",
+      "types": ["jest", "node"],
+      "baseUrl": "./",
+      "paths": {
+        "@src/*": ["src/*"]
+      }
+    },
+    "include": ["test/**/*.ts"]
+  }
+  
