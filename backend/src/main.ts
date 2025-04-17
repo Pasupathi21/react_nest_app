@@ -4,6 +4,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express'
 import * as dotenv from 'dotenv'
 import { join } from 'path'
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 
 async function bootstrap() {
   // load env data
@@ -20,7 +21,9 @@ async function bootstrap() {
 
   // global api prefix
   app.setGlobalPrefix('api')
-
+  const swaggerConfig: any = new DocumentBuilder().setTitle('Demo API').setDescription("Demo api with some validations").setVersion('0.0')
+  const document = SwaggerModule.createDocument(app, swaggerConfig)
+  SwaggerModule.setup('docs', app, document)
   const PORT = process.env.PORT || 3501
   console.log(PORT)
   await app.listen(PORT);

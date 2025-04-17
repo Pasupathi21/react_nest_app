@@ -12,6 +12,7 @@ import { UtilsModule } from './utils/utils.module';
 import { GlobalExceptionFilter } from './common/filters/globalexception.filter'; 
 import { RequestResponseService } from './utils/request-response/request-response.service';
 import { ControllerWrapperService } from './utils/controller-wrapper/controller-wrapper.service';
+import { DemoModule } from './features/demo/demo.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { ControllerWrapperService } from './utils/controller-wrapper/controller-
     AuthenticationModule, 
 
     // utils service modules
-    UtilsModule
+    UtilsModule,
+    DemoModule
   ],
   controllers: [AppController],
   providers: [
