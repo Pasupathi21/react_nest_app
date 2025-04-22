@@ -1,4 +1,4 @@
-import { Controller, Post, Headers, Body, Query, UsePipes, ValidationPipe, Res } from '@nestjs/common';
+import { Controller, Post, Headers, Body, Query, UsePipes, ValidationPipe, Res, Get } from '@nestjs/common';
 import { DemoService } from './demo.service'
 import { HeaderDto, BodyDto, QueryDto } from './dto'
 import { plainToInstance } from 'class-transformer'
@@ -13,6 +13,11 @@ export class DemoController {
         private readonly cws: ControllerWrapperService
      ) {}
 
+    @Get('get-data') 
+    async getData(@Res() res: Response) {
+      return await this.cws.ControllerWrapper(this.demoService, this.demoService.getData, res)
+    }
+      
     @UsePipes(new ValidationPipe())
     @ApiBody({
         type: BodyDto,
@@ -42,5 +47,8 @@ export class DemoController {
         console.log("header >>>>>>>>>", header)
         return await this.cws.ControllerWrapper(this.demoService, this.demoService.postData, res, header, body, query)
     }
+
+
+   
 
 }
