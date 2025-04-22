@@ -1,0 +1,121 @@
+{
+    "id": "proj_123",
+    "name": "NextGen Platform",
+    "status": "active",
+    "createdAt": "2025-01-10T12:00:00Z",
+    "metadata": {
+        "tags": [
+            "nodejs",
+            "nestjs",
+            "graphql",
+            "cloud"
+        ],
+        "budget": {
+            "currency": "USD",
+            "amount": 120000,
+            "spent": 45900.75
+        },
+        "timeline": {
+            "start": "2025-01-15",
+            "end": "2025-12-20",
+            "milestones": [
+                {
+                    "name": "MVP Launch",
+                    "due": "2025-04-30",
+                    "status": "on-track"
+                },
+                {
+                    "name": "Beta Release",
+                    "due": "2025-08-15",
+                    "status": "planned"
+                }
+            ]
+        }
+    },
+    "teams": [
+        {
+            "id": "team_01",
+            "name": "Backend Team",
+            "members": [
+                {
+                    "id": "u001",
+                    "name": "Alice",
+                    "role": "Team Lead",
+                    "skills": [
+                        "Node.js",
+                        "TypeScript",
+                        "NestJS"
+                    ],
+                    "availability": {
+                        "days": [
+                            "Mon",
+                            "Tue",
+                            "Wed"
+                        ],
+                        "hoursPerDay": 6
+                    }
+                },
+                {
+                    "id": "u002",
+                    "name": "Bob",
+                    "role": "Developer",
+                    "skills": [
+                        "GraphQL",
+                        "MongoDB"
+                    ],
+                    "availability": {
+                        "days": [
+                            "Tue",
+                            "Thu",
+                            "Fri"
+                        ],
+                        "hoursPerDay": 5
+                    }
+                }
+            ]
+        },
+        {
+            "id": "team_02",
+            "name": "Frontend Team",
+            "members": [
+                {
+                    "id": "u003",
+                    "name": "Charlie",
+                    "role": "Developer",
+                    "skills": [
+                        "React",
+                        "Tailwind",
+                        "Next.js"
+                    ]
+                }
+            ]
+        }
+    ],
+    "tasks": [
+        {
+            "id": "task_1001",
+            "title": "Set up GraphQL schema",
+            "assigneeId": "u001",
+            "status": "completed",
+            "subtasks": [
+                {
+                    "id": "subtask_1",
+                    "title": "Define types",
+                    "done": true
+                },
+                {
+                    "id": "subtask_2",
+                    "title": "Set up resolvers",
+                    "done": true
+                }
+            ]
+        },
+        {
+            "id": "task_1002",
+            "title": "Build login UI",
+            "assigneeId": "u003",
+            "status": "in-progress",
+            "subtasks": []
+        }
+    ]
+}
